@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Kafedrs extends Model
+{
+    use HasFactory;
+
+    public function faculty(){
+        return $this->belongsTo(Faculty::class);
+    }
+    public function groups(){
+        return $this->hasMany(Group::class);
+    }
+    public function disciplines(){
+        return $this->hasMany(Discipline::class);
+    }
+    public function teachers(){
+        return $this->hasMany(Teacher::class);
+    }
+}
