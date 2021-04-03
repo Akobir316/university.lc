@@ -52,14 +52,14 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ])) {
-            $role = \auth()->user()->getRoleNames();
+
             $id = \auth()->user()->getAuthIdentifier();
 
-            if($role[0]=="admin"){
+            if(\auth()->user()->hasRole('admin')){
                 return redirect()->route('admin.index');
-            } elseif ($role[0]=="teacher"){
-               return redirect()->route('teachers.index');
-            } elseif ($role[0]=="student"){
+            } elseif (\auth()->user()->hasRole('teacher')){
+               return redirect()->route('teachers', $id);
+            } elseif (\auth()->user()->hasRole('student')){
                 return  redirect()->route('students',$id);
             } else {
                return redirect()->home();

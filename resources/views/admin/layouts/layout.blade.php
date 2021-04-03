@@ -155,7 +155,7 @@
                     <img src="{{ asset('assets/admin/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">Alexander Pierce</a>
+                    <a href="#" class="d-block">{{auth()->user()['name']}}</a>
                 </div>
             </div>
 
@@ -204,13 +204,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('kafedrs.index')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Список кафедров</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('kafedrs.create')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Новая кафедра</p>
                                 </a>
@@ -228,13 +228,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('groups.index')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Список групп</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('groups.create')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Новая группа</p>
                                 </a>
@@ -251,13 +251,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('teachers.index')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Список преподователей</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('teachers.create')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Новый преподователь</p>
                                 </a>
@@ -273,13 +273,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('disciplines.index')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Список дисциплин</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('disciplines.create')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Новая дисциплина</p>
                                 </a>
@@ -310,52 +310,63 @@
                         </ul>
                     </li>
                     <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
+                        <a href="{{route('timetables.index')}}" class="nav-link">
                             <i class="fa fa-table"></i>
                             <p>
-                                Расписания
+                                Расписание
+                            </p>
+                        </a>
+
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="{{route('lessons.index')}}" class="nav-link">
+                            <i class="far fa-clock"></i>
+                            <p>
+                               Пары
+                            </p>
+                        </a>
+
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="{{route('lesstypes.index')}}" class="nav-link">
+                            <p>
+                               Типы занятий
+                            </p>
+                        </a>
+
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="{{route('classrooms.index')}}" class="nav-link">
+                            <p>Аудитории</p>
+                        </a>
+
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-users"></i>
+                            <p>
+                                Пользователи
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('users.index')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Список расписаний</p>
+                                    <p>Список пользователей</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('users.create')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Новое расписание</p>
+                                    <p>Новый пользователь</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="far fa-clock"></i>
-                            <p>
-                               Пары
-
-                            </p>
-                        </a>
-
-                    </li>
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-
-                            <p>
-                               Типы занятий
-
-                            </p>
-                        </a>
-
-                    </li>
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-
-                            <p>Аудитории</p>
+                        <a href="{{route('roles.index')}}" class="nav-link">
+                            <p>Роли</p>
                         </a>
 
                     </li>
@@ -385,6 +396,11 @@
                             {{ session('success') }}
                         </div>
                     @endif
+                        @if (session()->has('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                 </div>
             </div>
         </div>

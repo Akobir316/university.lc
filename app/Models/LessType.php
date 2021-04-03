@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class LessType extends Model
 {
     use HasFactory;
+    public $timestamps =false;
+    protected $guarded =[];
     public function timeTable()
     {
         return $this->hasMany(TimeTable::class);

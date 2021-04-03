@@ -13,4 +13,8 @@ class Faculty extends Model
     public function kafedrs(){
         return $this->hasMany(Kafedrs::class);
     }
+    public function groups(){
+        return $this->hasManyThrough(Group::class, Kafedrs::class, 'faculty_id', 'kafedr_id', 'id', 'id');
+    }
+
 }

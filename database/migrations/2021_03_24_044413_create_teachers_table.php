@@ -15,13 +15,14 @@ class CreateTeachersTable extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_kafedry');
+            $table->integer('kafedr_id');
             $table->string('fio','100');
             $table->string('position','50');
             $table->decimal('rate',3,2);
             $table->string('stag','50');
             $table->string('adress','255');
             $table->tinyInteger('age');
+            $table->integer('user_id')->nullable();
 
         });
     }

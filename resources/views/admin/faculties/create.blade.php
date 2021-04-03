@@ -50,7 +50,7 @@
                                     @error('room')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <label for="phone">Адресс</label>
+                                    <label for="phone">Телефон</label>
                                     <input name="phone" type="text" class="form-control @error('phone') is-invalid @enderror" value="{{old('phone')}}" id="adress" placeholder="Телефон">
                                     @error('phone')
                                     <div class="invalid-feedback">{{ $message }}</div>

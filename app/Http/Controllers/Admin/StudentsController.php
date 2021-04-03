@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class StudentsController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +30,6 @@ class StudentsController extends Controller
     public function create()
     {
         $groups = Group::pluck('group', 'id')->all();
-
         return view('admin.students.create', compact('groups'));
     }
 
@@ -41,7 +41,6 @@ class StudentsController extends Controller
      */
     public function store(Request $request)
     {
-
 
         $rules=[
             'group_id'=>'integer',
@@ -57,7 +56,7 @@ class StudentsController extends Controller
         ];
         $validator = Validator::make($request->all(),$rules,$mess)->validate();
         Student::create($request->all());
-        $request->session()->flash('success', '');
+
         return redirect()->route('students.index')->with('success', 'Студент добавлен');
     }
 

@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Group extends Model
 {
     use HasFactory;
-    protected $fillable = ['group'];
-    public function kafedry()
+    public $timestamps = false;
+    protected $fillable = ['kafedr_id','group','date_receipts','course'];
+    public function kafedr()
     {
         return $this->belongsTo(Kafedrs::class);
     }

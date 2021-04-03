@@ -16,8 +16,8 @@ class CreateFacultiesTable extends Migration
         Schema::create('faculties', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', '100');
-            $table->string('fio_dean','50')->nullable();
-            $table->string('room','20')->nullable();
+            $table->string('fio_dean','50');
+            $table->string('room','20');
             $table->string('phone','20')->nullable();
 
         });

@@ -6,22 +6,25 @@ use App\Models\Classroom;
 use App\Models\Day;
 use App\Models\Lesson;
 use App\Models\LessType;
+use App\Models\Teacher;
 use App\Models\TimeTable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class TeachersController extends Controller
 {
-    public function index(){
-        return view('teacher');
+    public function index($id){
+        $teacher = Teacher::where('user_id', $id)->get();
+        return view('teacher', compact('teacher'));
     }
     public function filterTable(Request $request)
     {
+
         $request->validate([
             'room'=>'required'
         ]);
         $room = $request->room . $request->korpus;
-        $classroom = Classroom::where('name',$room)->get();
+        $classroom = Classroom::where('name',$room)->whereNull('status')->get();
         if($classroom->count()) {
             $time = explode('/', $request->time);
             $para = Lesson::all();
@@ -49,7 +52,7 @@ class TeachersController extends Controller
             $request->session()->flash('er', 'Учёба с 8:30 до 18:00');
             return view('teacher');
         }
-        $request->session()->flash('er','В университете не существует  '.$room.'-аудитория');
+        $request->session()->flash('er','В университете не существует  или введенная комната зарезервирована'.$room.'-аудитория');
         return view('teacher');
 
     }

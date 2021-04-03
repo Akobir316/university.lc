@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Classroom;
 use App\Models\Faculty;
+use App\Models\Kafedrs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\Console\Input\Input;
 
 class FacultiesController extends Controller
 {
@@ -38,16 +41,17 @@ class FacultiesController extends Controller
      */
     public function store(Request $request)
     {
-        $rules=[
+        $request->validate([
             'name'=>'required',
-        ];
-        $mess=[
-            'name.required'=>'Заполните поле название факультета'
-        ];
-        $validator = Validator::make($request->all(),$rules,$mess)->validate();
-        Faculty::create($request->all());
-        $request->session()->flash('success', '');
-        return redirect()->route('faculties.index')->with('success', 'Факультет добавлен');
+            'fio_dean'=>'required',
+            'room'=>'required'
+        ]);
+        if(Classroom::where('name', $request->room)->whereNull('status')->exists()){
+            Faculty::create($request->all());
+            Classroom::where('name',$request->room)->update(['status'=>$request->name]);
+            return redirect()->route('faculties.index')->with('success', 'Факультет добавлен');
+        }
+        return redirect()->route('faculties.index')->with('error','Введенная комната занята или не существует');
     }
 
     /**
@@ -83,6 +87,13 @@ class FacultiesController extends Controller
     public function update(Request $request, $id)
     {
         $faculty = Faculty::find($id);
+
+        if($faculty->room !== $request->room&&Classroom::where('name', $request->room)->whereNull('status')->exists()) {
+            Classroom::where('name', $faculty->room)->update(['status'=>null]);
+            Classroom::where('name', $request->room)->update(['status'=>$request->name]);
+        } else {
+            return redirect()->route('faculties.edit', $id)->with('error','Введенная комната занята или не существует');
+        }
         $faculty->update($request->all());
         return redirect()->route('faculties.index')->with('success', 'Изменения сохранены');
     }
@@ -95,6 +106,9 @@ class FacultiesController extends Controller
      */
     public function destroy($id)
     {
+        if(Kafedrs::where('faculty_id', $id)->count()){
+            return redirect()->route('faculties.index')->with('error', 'Невозможно удалить, факультет имеет кафедры');
+        } Classroom::where('name', Faculty::find($id)->room)->update(['status'=>null]);
         Faculty::destroy($id);
         return redirect()->route('faculties.index')->with('success', 'Факультет удален');
     }

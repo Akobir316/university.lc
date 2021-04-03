@@ -8,6 +8,9 @@
     <title>Teacher</title>
 </head>
 <body>
+<div>
+
+</div>
 <p>Фильтры</p>
 <form action="{{route('filters')}}" method="get">
     <label for="room">Выберите аудиторию: </label>

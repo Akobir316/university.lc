@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Kafedrs extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+    protected $fillable = ['faculty_id', 'name', 'fio_manage', 'room', 'phone'];
 
     public function faculty(){
         return $this->belongsTo(Faculty::class);
@@ -21,4 +23,5 @@ class Kafedrs extends Model
     public function teachers(){
         return $this->hasMany(Teacher::class);
     }
+
 }

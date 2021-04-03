@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Teacher extends Model
 {
     use HasFactory;
-    public function kafedry(){
+    public $timestamps = false;
+    protected $guarded = [];
+    public function kafedr(){
         return $this->belongsTo(Kafedrs::class);
     }
     public function timeTable(){

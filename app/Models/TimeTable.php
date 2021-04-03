@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class TimeTable extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+    protected $guarded = [];
     public function day(){
         return $this->belongsTo(Day::class);
     }
